@@ -32,13 +32,16 @@ const routesinit = {
 
 export default function StandardMap(props) {
   const [routes, setRoutes] = React.useState(routesinit) // responses
-  const [requests, setRequests] = React.useState(routesinit) // keep track of requests to avoid pinging API over and over
+
+  console.log(routes)
+
+  // const [requests, setRequests] = React.useState(routesinit) // keep track of requests to avoid pinging API over and over
 
   // indicate that we've made a directions api request
   const madeRequest = (to) => {
-    let clone = {...requests}
-    const from = props.homes[props.selected].name
-    clone[to] = {[from]: true}
+    // let clone = {...requests}
+    // const from = props.homes[props.selected].name
+    // clone[to] = {[from]: true}
     // setRequests(clone) // infinite looop ?!!?!
   }
 
@@ -90,8 +93,9 @@ export default function StandardMap(props) {
             // only call api if we haven't requested this route
             const fromCoord = props.homes[props.selected].position
             const from = props.homes[props.selected].name
-            if (Object.keys(routes[to]).length === 0) { // only call this if we haven't made a request
+            if (!routes[to][from] || Object.keys(routes[to][from]).length === 0) { // only call this if we haven't made a request
               madeRequest(to) // indicate we made this call to avoid hitting API again
+              console.log(`Calling API from ${from} ${to}`)
               return (
                 <DirectionsService
                   // required
