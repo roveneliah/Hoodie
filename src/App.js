@@ -1,6 +1,7 @@
 import React from 'react';
 import {useLoadScript} from "@react-google-maps/api"
 import homesInit from './homes'
+import routesInit from './routes'
 
 import MainView from './components/MainView/MainView'
 import PropertyView from './components/PropertyView/PropertyView'
@@ -18,7 +19,12 @@ export default function App() {
   // better name? 
   const [selected, setSelected] = React.useState(null);
   const [homes, setHomes] = React.useState(homesInit)
-  const [galleryOpen, setGalleryOpen] = React.useState(false)
+
+  // manually set user for now
+  const user = {
+    name: "Nico",
+    agent: false
+  }
 
   // check api loaded correctly
   if(loadError)return"Error loading maps"
@@ -35,6 +41,7 @@ export default function App() {
       {/* give method to change the state of the marker */}
       {selected != null ? (
         <PropertyView
+          user={user}
           home={homes[selected]}
           selected={selected}
           setSelected={setSelected}
@@ -50,6 +57,7 @@ export default function App() {
         />
       ) : (
         <MainView
+          user={user}
           homes={homes}
         />
       )}

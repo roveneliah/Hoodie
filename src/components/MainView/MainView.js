@@ -26,6 +26,7 @@ export default function MainView(props) {
       />
 
       <ChatDrawer
+        user={props.user}
         chatOpen={chatOpen}
         setChatOpen={setChatOpen}
       />

@@ -41,7 +41,7 @@ export default function ChatDrawer(props) {
         >
           <ArrowBackIcon />
         </Fab>
-        <ChatDisplay />
+        <ChatDisplay user={props.user}/>
       </Drawer>
   )
 }
