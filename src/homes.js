@@ -11,7 +11,8 @@ export default [{
   tags: [
     "chelsea",
   ],
-  agentNotes: "Hey Nico.  This is a new building with a lot of young professionals like yourself.  I placed a fellow Richmond alum there last year, who I can connect you with if you’d like.  They have a great gym, and are near a lot of popular bars."
+  agentNotes: "Hey Nico.  This is a new building with a lot of young professionals like yourself.  I placed a fellow Richmond alum there last year, who I can connect you with if you’d like.  They have a great gym, and are near a lot of popular bars.",
+  notes: "Hey Nico.  This is a new building with a lot of young professionals like yourself.  I placed a fellow Richmond alum there last year, who I can connect you with if you’d like.  They have a great gym, and are near a lot of popular bars.",
 }, {
   name: "77 Charlton Street",
   cost: 3600000,
@@ -27,7 +28,8 @@ export default [{
     "cute street",
     "near john's place"
   ],
-  agentNotes: "Hey Nico.  This is a new building with a lot of young professionals like yourself.  I placed a fellow Richmond alum there last year, who I can connect you with if you’d like.  They have a great gym, and are near a lot of popular bars."
+  agentNotes: "Hey Nico.  This is a new building with a lot of young professionals like yourself.  I placed a fellow Richmond alum there last year, who I can connect you with if you’d like.  They have a great gym, and are near a lot of popular bars.",
+  notes: "Hey Nico.  This is a new building with a lot of young professionals like yourself.  I placed a fellow Richmond alum there last year, who I can connect you with if you’d like.  They have a great gym, and are near a lot of popular bars.",
 }, {
   name: "11 Fifth Avenue",
   cost: 7000000,
@@ -42,6 +44,7 @@ export default [{
     "big kitchen",
     "art galleries nearby"
   ],
-  agentNotes: "Hey Nico.  This is a new building with a lot of young professionals like yourself.  I placed a fellow Richmond alum there last year, who I can connect you with if you’d like.  They have a great gym, and are near a lot of popular bars."
+  agentNotes: "Hey Nico.  This is a new building with a lot of young professionals like yourself.  I placed a fellow Richmond alum there last year, who I can connect you with if you’d like.  They have a great gym, and are near a lot of popular bars.",
+  notes: "Hey Nico.  This is a new building with a lot of young professionals like yourself.  I placed a fellow Richmond alum there last year, who I can connect you with if you’d like.  They have a great gym, and are near a lot of popular bars.",
 }
 ]

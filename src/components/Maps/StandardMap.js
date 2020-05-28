@@ -1,4 +1,5 @@
 import React from 'react'
+import { pure } from 'recompose';
 
 import {
   GoogleMap,
@@ -10,6 +11,7 @@ import {
 } from "@react-google-maps/api"
 
 import mapStyles from "../../mapStyles"
+import routesInit from '../../routes'
 
 const mapContainerStyle = {
   width: '100vw',
@@ -23,19 +25,19 @@ const options = {
   styles: mapStyles
 }
 
-const routesinit = {
-  "Times Square": {},
-  'whitney museum': {},
-  'madison square garden': {},
-  'the MET': {}
-}
+// const routesinit = {
+//   "Times Square": {},
+//   'whitney museum': {},
+//   'madison square garden': {},
+//   'the MET': {}
+// }
 
-export default function StandardMap(props) {
-  const [routes, setRoutes] = React.useState(routesinit) // responses
+const StandardMap = pure((props) => {
 
-  console.log(routes)
+  console.log('RELOAD MAP VIEW')
 
-  // const [requests, setRequests] = React.useState(routesinit) // keep track of requests to avoid pinging API over and over
+  const routes = props.routes
+  const setRoutes = props.setRoutes
 
   // indicate that we've made a directions api request
   const madeRequest = (to) => {
@@ -53,6 +55,7 @@ export default function StandardMap(props) {
         if (!routes[to][from]) { // if response doesn't exist
           let clone = {...routes}
           clone[to][from] = response
+          console.log(clone[to][from].routes[0].legs[0].duration.text)
           setRoutes(clone)
         }
       } else {
@@ -65,26 +68,26 @@ export default function StandardMap(props) {
     <>
       <GoogleMap mapContainerStyle={mapContainerStyle} zoom={11} center={center} options={options}> 
         {props.homes.map((home, index) => {
-
-          let icons = ["/MarkerTrash.svg", "/MarkerNew.svg", "/MarkerLove.svg"];
+          const icons = ["/MarkerTrash.svg", "/MarkerNew.svg", "/MarkerLove.svg"];
+          const status = props.statuses[home.name] 
           const marker = (
             <Marker
-                // title={home.name}
-                position={home.position}
-                icon={{
-                  url: icons[home.status+1],
-                  scaledSize: new window.google.maps.Size(50,50)
-                }}
-                onClick={() => {
-                  console.log(`Set selected: ${home.name}`)
-                  props.setSelected(index)
-                }}
-              />
+              // title={home.name}
+              position={home.position}
+              icon={{
+                url: icons[status+1],
+                scaledSize: new window.google.maps.Size(50,50)
+              }}
+              onClick={() => {
+                console.log(`Set selected: ${props.selected}`)
+                props.setSelected(index)
+              }}
+            />
           )
 
           if (props.selected == null || props.homes[props.selected].position === home.position) {
             return marker
-          } 
+          }
         })}
 
         {/* get directions */}
@@ -95,14 +98,15 @@ export default function StandardMap(props) {
             const from = props.homes[props.selected].name
             if (!routes[to][from] || Object.keys(routes[to][from]).length === 0) { // only call this if we haven't made a request
               madeRequest(to) // indicate we made this call to avoid hitting API again
-              console.log(`Calling API from ${from} ${to}`)
+              // console.log(`Calling API from ${from} ${to}`)
               return (
                 <DirectionsService
                   // required
                   options={{
                     destination: to,
                     origin: fromCoord,
-                    travelMode: 'DRIVING'
+                    travelMode: 'DRIVING',
+                    // provideRouteAlternatives: true,
                   }}
                   // required
                   callback={directionsCallback}
@@ -125,6 +129,18 @@ export default function StandardMap(props) {
                     directions: route
                   }}
                   routeIndex={i}
+                  // panel=???? how does this work?
+                  // options={{
+                  //   // suppressMarkers: true,
+                  //   // icon: {scale: 3}
+                  //   // polylineOptions: {
+                  //   //   // map: map,
+                  //   //   strokeColor: "#2249a3",
+                  //   //   strokeOpacity: 0.9 ,
+                  //   //   strokeWeight: 12,
+                  //   //   // z-index: 99
+                  //   // }
+                  // }}
                 />
               )
             }
@@ -144,4 +160,6 @@ export default function StandardMap(props) {
       </GoogleMap>
     </>
   )
-}
+})
+
+export default StandardMap

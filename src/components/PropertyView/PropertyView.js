@@ -16,17 +16,15 @@ import Tab from '@material-ui/core/Tab';
 
 
 export default function PropertyView(props) {
-  // const classes = useStyles();
-
   const [galleryOpen, setGalleryOpen] = React.useState(false)
   const [drawerView, setDrawerView] = React.useState('spots')
 
   const view = {
     'spots': (
-      <Spots />
+      <Spots spots={props.spots} />
     ),
     'notes': (
-      <PropertyNotes />
+      <PropertyNotes notes={props.note} setNotes={props.updateHomeNotes} />
     ),
     'chat': (
       <PropertyChat user={props.user} />
@@ -71,11 +69,14 @@ export default function PropertyView(props) {
             }}>
               <Fab
                 style={{
-                  'backgroundColor': props.home.status === 1 ? 'black' : 'red',
+                  'backgroundColor': props.status === 1 ? 'black' : 'red',
                   'color': 'white'
                 }}
                 onClick={() => {
-                  let newStatus = props.home.status === 1 ? null : 1
+                  let newStatus = props.status === 1 ? null : 1
+                  console.log(`newStatus: ${newStatus}`)
+                  console.log(props.status)
+                  console.log(props.status === 1)
                   props.updateHomeStatus(newStatus)
                 }}
               >
@@ -83,11 +84,11 @@ export default function PropertyView(props) {
               </Fab>
               <Fab
                 style={{
-                  'backgroundColor': props.home.status === -1 ? 'black' : 'orange',
+                  'backgroundColor': props.status === -1 ? 'black' : 'orange',
                   'color': 'white'
                 }}
                 onClick={() => {
-                  let newStatus = props.home.status === -1 ? null : -1
+                  let newStatus = props.status === -1 ? null : -1
                   props.updateHomeStatus(newStatus)
                 }}
               >
