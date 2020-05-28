@@ -20,11 +20,20 @@ const loadedStatuses = homesInit.reduce((statuses, home) => {
   return statuses
 }, {})
 
+// const loadedStatuses = homesInit.map(home => home.statuses)
+const loadedMessages = homesInit.reduce((messages, home) => {
+  messages[home.name] = home.messages
+  return messages
+}, {})
+
 
 // manually set user for now
 const user = {
   name: "Nico",
-  agent: false
+}
+
+const agent = {
+  name: "Michelle Agenta"
 }
 
 
@@ -33,6 +42,7 @@ export default function MapView(props) {
   const [homes, setHomes] = React.useState(homesInit);
   const [notes, setNotes] = React.useState(loadedNotes);
   const [statuses, setStatuses] = React.useState(loadedStatuses)
+  const [messages, setMessages] = React.useState(loadedMessages)
   const [routes, setRoutes] = React.useState(routesInit) // responses, we want these right away
 
   // return the commute time from selected property
@@ -89,7 +99,19 @@ export default function MapView(props) {
             updated[homes[selected].name] = status
             setStatuses(updated)
           }}
-          
+          messages={!messages[homes[selected].name] ? [] : messages[homes[selected].name]}
+          sendMessage={(text) => {
+            let clone = {...messages}
+            let chatMessages = clone[homes[selected].name]
+            if (!chatMessages) chatMessages = []
+            chatMessages.push({
+              text: text,
+              agent: user.name == agent.name,
+              sender: user.name
+            })
+            clone[homes[selected].name] = chatMessages
+            setMessages(clone)
+          }}
         />
       ) : (
         <MainView

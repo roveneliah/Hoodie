@@ -10,10 +10,6 @@ import Drawer from '@material-ui/core/Drawer';
 import Fab from '@material-ui/core/Fab';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-
 
 export default function PropertyView(props) {
   const [galleryOpen, setGalleryOpen] = React.useState(false)
@@ -24,10 +20,16 @@ export default function PropertyView(props) {
       <Spots spots={props.spots} />
     ),
     'notes': (
-      <PropertyNotes notes={props.note} setNotes={props.updateHomeNotes} />
+      <PropertyNotes
+        notes={props.note}
+        setNotes={props.updateHomeNotes} />
     ),
     'chat': (
-      <PropertyChat user={props.user} />
+      <PropertyChat
+        user={props.user}
+        messages={props.messages}
+        sendMessage={props.sendMessage}
+      />
     )
   }
 

@@ -5,33 +5,13 @@ import ChatBubble from './ChatBubble'
 import TextField from '@material-ui/core/TextField';
 import { Fab } from '@material-ui/core';
 
-const messages = [
-  {
-    sender: 'Michelle',
-    agent: true,
-    text: "Hi Nico, I just uploaded a few new spots after you thought Chelsea would be a good fit."
-  },
-  {
-    sender: 'Nico',
-    text: 'Thanks, I\'ll look through them and get back to you'
-  }
-]
-
 export default function ChatDisplay(props) {
   const [messageText, setMessageText] = React.useState('')
 
   const sendMessage = (text) => {
     console.log(`send: ${JSON.stringify(text)}`)
     setMessageText('') // reset msg text
-    messages.push({
-      sender: props.user.name, // programmatic
-      agent: props.user.agent,   // programmatic
-      text: text
-    })
-  }
-
-  const handleSubmit = (event) => {
-    console.log(event.target.value)
+    props.sendMessage(text)
   }
 
   return (
@@ -41,7 +21,7 @@ export default function ChatDisplay(props) {
         display: 'flex',
         flexDirection: 'column',
       }}>
-        {messages.map(msg => (
+        {props.messages.map(msg => (
           <ChatBubble
             msg={msg}
           />
