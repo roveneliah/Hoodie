@@ -6,9 +6,6 @@ import img1 from '../../img1.png'
 import img2 from '../../img2.png'
 import img3 from '../../img3.png'
 
-
-const { red, blue, green } = require('@material-ui/core/colors');
-
 export default function Carousel(props) {
   return (
     <AutoRotatingCarousel
@@ -20,7 +17,22 @@ export default function Carousel(props) {
           backgroundColor: 'black'
         }}
       >
-        <div style={{
+        {props.images.map(imgSrc => {
+          return (
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#7837FF',
+              height: "100%"
+            }}>
+              <img src={imgSrc} style={{ height: '85%'}}/>
+            </div>
+          )
+        })}
+
+        {/* <div style={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -49,7 +61,7 @@ export default function Carousel(props) {
           height: "100%"
         }}>
           <img src={img3} style={{ height: '85%'}}/>
-        </div>
+        </div> */}
         
         {/* <Slide
           media={<img src={img3} />}

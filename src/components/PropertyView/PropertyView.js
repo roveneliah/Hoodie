@@ -38,7 +38,8 @@ export default function PropertyView(props) {
         openGallery={() => { setGalleryOpen(true) }}
       />
 
-      <Carousel 
+      <Carousel
+        images={props.home.images}
         open={galleryOpen}
         close={() => { setGalleryOpen(false) }} 
       />
