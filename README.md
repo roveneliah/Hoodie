@@ -1,5 +1,9 @@
-![gif](src/flow.gif)
+## Hoodie
 Hoodie is an experimental __collaborative real estate canvas__, where agents and buyers can work together to facilitate a fundamentally better homebuying experience.
+
+
+![gif](src/flow.gif)
+
 
 ## Motivation
 For Agents:
